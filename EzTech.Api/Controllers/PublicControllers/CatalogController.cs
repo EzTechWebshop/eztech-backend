@@ -33,7 +33,6 @@ public class CatalogController : BaseController
         [FromQuery] string? sort,
         [FromQuery] int? categoryId)
     {
-        // console write the current link
         // TODO: Maybe this should be moved to a config file or something
         const int defaultPage = 1;
         const int defaultPageSize = 25;
