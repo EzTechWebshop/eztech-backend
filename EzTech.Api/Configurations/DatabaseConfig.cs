@@ -11,11 +11,5 @@ public static class DatabaseConfig
         services.AddDbContext<EzTechDbContext>(options =>
             options.UseMySql(connectionString,
                 new MySqlServerVersion(new Version(8, 0, 29))));
-        
-        // Database: SqlServer
-        /*
-        services.AddDbContext<EzTechDbContext>(options =>
-            options.UseSqlServer(connectionString));
-        */
     }
 }

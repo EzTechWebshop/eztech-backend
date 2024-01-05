@@ -19,15 +19,14 @@ public class Startup
         var audience = Configuration["Jwt:Audience"];
         var key = Configuration["Jwt:Key"];
         var connectionString = Configuration.GetConnectionString("conn");
-        
+
         // Checks if any of the configuration values are missing
         if (issuer is null || audience is null || key is null || connectionString is null)
         {
             throw new Exception("Missing configuration");
         }
-        
+
         // Adds cors policy which allows any origin, method and header
-        // TODO: Change this to only allow the frontend origin
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", builder =>

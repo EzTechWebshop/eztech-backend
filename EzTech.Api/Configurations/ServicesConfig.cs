@@ -15,10 +15,9 @@ public static class ServicesConfig
         // Services
         ServiceClasses(services);
         services.AddSingleton<JwtHelper>();
-        
+
         // Auto Mapper Configurations
         services.AddAutoMapper(typeof(MappingProfile));
-        
     }
 
     private static void ServiceClasses(IServiceCollection services)

@@ -4,15 +4,15 @@ namespace EzTech.Data.Models;
 
 public class Image
 {
-    [Key]
+    [Key] 
     public int Id { get; set; }
-    [Required]
+    
+    [Required] 
     public string Name { get; set; } = null!;
-    [Required]
+    
+    [Required] 
     public string FileName { get; set; } = null!;
-    [Required]
+    
+    [Required] 
     public string Alt { get; set; } = "img";
-    [Required]
-    public int ProductId { get; set; }
-    public Product Product { get; set; } = null!;
 }

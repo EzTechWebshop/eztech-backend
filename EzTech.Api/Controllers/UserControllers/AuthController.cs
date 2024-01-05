@@ -139,7 +139,8 @@ public class AuthController : BaseUserController
         return Ok("Successfully verified email");
     }
 
-    public AuthController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager, JwtHelper jwtHelper) : base(mapper, dbContext, emailManager)
+    public AuthController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager, JwtHelper jwtHelper) :
+        base(mapper, dbContext, emailManager)
     {
         _jwtHelper = jwtHelper;
     }

@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace EzTech.Api.Controllers;
 
 /// <summary>
-/// Used for all controller
-/// Right now unnecessary, but can be used for common methods in the future
+/// Used for all controllers
 /// </summary>
 public class BaseController : ControllerBase
 {
     protected readonly IMapper Mapper;
     protected readonly EzTechDbContext DbContext;
+
     public BaseController(IMapper mapper, EzTechDbContext dbContext)
     {
         Mapper = mapper;

@@ -9,7 +9,6 @@ namespace EzTech.Api.Controllers.PublicControllers;
 
 /// <summary>
 /// Catalog that is public to all people who visit the website, and is used to display products and categories
-/// TODO: Maybe add a way to limit the amount of calls to the database to avoid DDOS attacks or something
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
@@ -17,7 +16,7 @@ public class CatalogController : BaseController
 {
     private readonly EzTechDbContext _ezTechDbContext;
     private readonly IMapper _mapper;
-    
+
 
     /// <summary>
     /// This is the universal method for getting products in the catalog.
@@ -33,13 +32,13 @@ public class CatalogController : BaseController
         [FromQuery] string? sort,
         [FromQuery] int? categoryId)
     {
-        // TODO: Maybe this should be moved to a config file or something
         const int defaultPage = 1;
         const int defaultPageSize = 25;
         page ??= defaultPage;
         pageSize ??= defaultPageSize;
         if (page < 1) page = defaultPage;
         if (pageSize < 1) pageSize = defaultPageSize;
+
         var products = _ezTechDbContext.Products
             .Include(x => x.Categories)
             .Include(x => x.Images)
@@ -79,7 +78,7 @@ public class CatalogController : BaseController
         // If there are no products, return an empty list
         if (totalProducts == 0)
         {
-            var response2 = new ProductListResponse
+            var emptyResponse = new ProductListResponse
             {
                 TotalProducts = totalProducts,
                 TotalPages = 0,
@@ -89,7 +88,7 @@ public class CatalogController : BaseController
                 Sort = sort ?? "",
                 Products = new List<ProductDto>(),
             };
-            return Ok(response2);
+            return Ok(emptyResponse);
         }
 
         var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize.Value);
@@ -205,11 +204,12 @@ public class CatalogController : BaseController
             .Include(x => x.SpecialOpeningHours)
             .Include(x => x.WebsiteInfoFields.OrderBy(text => text.Title))
             .FirstOrDefaultAsync();
-        
+
         if (websiteInfo == null)
         {
             return NotFound("No website info found");
         }
+
         var response = _mapper.Map<WebsiteInfoDto>(websiteInfo);
         return Ok(response);
     }
@@ -229,16 +229,18 @@ public class CatalogController : BaseController
         {
             return NotFound("No promotions found");
         }
+
         var response = new PromotionListResponse
         {
             Promotions = _mapper.Map<List<PromotionDto>>(promotions),
             PromotionCount = promotions.Count
         };
-        
+
         return Ok(response);
     }
-    
-    public CatalogController(IMapper mapper, EzTechDbContext dbContext, EzTechDbContext ezTechDbContext) : base(mapper, dbContext)
+
+    public CatalogController(IMapper mapper, EzTechDbContext dbContext, EzTechDbContext ezTechDbContext) : base(mapper,
+        dbContext)
     {
         _mapper = mapper;
         _ezTechDbContext = ezTechDbContext;

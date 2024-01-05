@@ -6,16 +6,20 @@ public class Cart
 {
     [Key] 
     public int Id { get; set; }
+    
     [Required] 
     public List<CartItem> CartItems { get; set; } = new();
+    
     [Required] 
     public int TotalQuantity => CartItems.Sum(item => item.Quantity);
+    
     [Required] 
     public decimal TotalPrice => CartItems.Sum(item => item.Price);
-    [Required]
+    
+    [Required] 
     public int UserId { get; set; }
     public User User { get; set; } = null!;
-    
+
     public void AddItem(Product product)
     {
         var item = CartItems
@@ -27,6 +31,7 @@ public class Cart
             item.Quantity++;
             return;
         }
+
         item = new CartItem
         {
             ProductId = product.Id,
@@ -44,7 +49,7 @@ public class Cart
         if (item == null) return;
         CartItems.Remove(item);
     }
-    
+
     public void ChangeQuantity(int cartItemId, int quantity)
     {
         var item = CartItems

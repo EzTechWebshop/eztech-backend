@@ -9,7 +9,7 @@ public interface IEmailManager
 }
 
 // Here we send an email, subject and message to the user
-// Ideally, we would have some sort of template for the message, but for now, we'll just send a string
+// Ideally, we would have some sort of template for the message, but for now, we'll just send normal text
 public class EmailService : IEmailManager
 {
     public async Task<bool> SendEmail(string email, string subject, string message)

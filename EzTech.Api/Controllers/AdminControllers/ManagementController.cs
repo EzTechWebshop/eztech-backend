@@ -142,7 +142,7 @@ public class ManagementController : BaseAdminController
 
         if (totalPromotions == 0)
         {
-            var response2 = new GetPromotionsApiResponse
+            var emptyResponse = new GetPromotionsApiResponse
             {
                 TotalPromotions = totalPromotions,
                 TotalPages = 0,
@@ -152,7 +152,7 @@ public class ManagementController : BaseAdminController
                 Sort = sort ?? "",
                 Promotions = new List<PromotionDto>(),
             };
-            return Ok(response2);
+            return Ok(emptyResponse);
         }
 
         // Pagination
@@ -233,7 +233,7 @@ public class ManagementController : BaseAdminController
         var totalCategories = categories.Count();
         if (totalCategories == 0)
         {
-            var response2 = new GetCategoriesApiResponse
+            var emptyResponse = new GetCategoriesApiResponse
             {
                 TotalCategories = totalCategories,
                 TotalPages = 0,
@@ -244,7 +244,7 @@ public class ManagementController : BaseAdminController
                 Categories = new List<CategoryDto>(),
                 Category = Mapper.Map<CategoryDto>(category),
             };
-            return Ok(response2);
+            return Ok(emptyResponse);
         }
 
         // Pagination
@@ -358,7 +358,7 @@ public class ManagementController : BaseAdminController
         var totalProducts = products.Count();
         if (totalProducts == 0)
         {
-            var response2 = new GetProductsApiResponse
+            var emptyResponse = new GetProductsApiResponse
             {
                 TotalProducts = totalProducts,
                 TotalPages = 0,
@@ -372,7 +372,7 @@ public class ManagementController : BaseAdminController
                 Sort = sort ?? "",
                 Products = new List<ProductDto>(),
             };
-            return Ok(response2);
+            return Ok(emptyResponse);
         }
 
         var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize.Value);
@@ -480,7 +480,7 @@ public class ManagementController : BaseAdminController
         var totalOrders = orders.Count();
         if (totalOrders == 0)
         {
-            var response2 = new GetOrdersApiResponse
+            var emptyResponse = new GetOrdersApiResponse
             {
                 TotalOrders = totalOrders,
                 TotalPages = 0,
@@ -491,7 +491,7 @@ public class ManagementController : BaseAdminController
                 Sort = sort ?? "",
                 Orders = new List<OrderDto>(),
             };
-            return Ok(response2);
+            return Ok(emptyResponse);
         }
 
         // Pagination

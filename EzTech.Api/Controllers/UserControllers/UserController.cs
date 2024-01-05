@@ -15,13 +15,14 @@ namespace EzTech.Api.Controllers.UserControllers;
 [Route("api/[controller]")]
 public class UserController : BaseUserController
 {
-    
     [HttpPost]
     [Route("add-rating/{productId:int}")]
     public async Task<IActionResult> AddRating(int productId, [FromBody] AddRatingRequest request)
     {
         var user = await DbContext.Users.FindAsync(UserPrincipal.Id);
         var product = await DbContext.Products.FindAsync(productId);
+        if (user == null) return NotFound("User not found");
+        if (product == null) return NotFound("Product not found");
         var rating = new Rating
         {
             Rate = request.Rate,
@@ -33,7 +34,7 @@ public class UserController : BaseUserController
         await DbContext.SaveChangesAsync();
         return Ok("Rating added");
     }
-    
+
     [HttpGet]
     [Route("get-details")]
     public async Task<IActionResult> GetDetails()
@@ -42,12 +43,12 @@ public class UserController : BaseUserController
         var response = Mapper.Map<UserDto>(user);
         return Ok(response);
     }
-    
+
     [HttpGet]
     [Route("get-orders")]
     public async Task<IActionResult> GetOrders(
         [FromQuery] string? status
-        )
+    )
     {
         var orders = DbContext.Orders
             .Include(x => x.Items)
@@ -63,6 +64,7 @@ public class UserController : BaseUserController
             var orderStatus = Enum.Parse<OrderStatus>(status);
             orders = orders.Where(x => x.Status == orderStatus);
         }
+
         var orderList = await orders.ToListAsync();
         var response = new GetUserOrdersResponse
         {
@@ -73,10 +75,10 @@ public class UserController : BaseUserController
             CompletedOrders = completedOrders,
             Orders = Mapper.Map<List<OrderDto>>(orderList),
         };
-        
+
         return Ok(response);
     }
-    
+
     [HttpPatch]
     [Route("update-details")]
     public async Task<IActionResult> UpdateDetails([FromBody] UpdateUserDetailsRequest request)
@@ -91,6 +93,7 @@ public class UserController : BaseUserController
                 return Conflict("Phone number already exists");
             }
         }
+
         if (user.Email != request.Email)
         {
             var emailExists = await DbContext.Users.AnyAsync(x => x.Email == request.Email);
@@ -99,6 +102,7 @@ public class UserController : BaseUserController
                 return Conflict("Email already exists");
             }
         }
+
         user.UpdateDetails(request);
         await DbContext.SaveChangesAsync();
         var response = Mapper.Map<UserDto>(user);
@@ -106,7 +110,8 @@ public class UserController : BaseUserController
     }
 
 
-    public UserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext, emailManager)
+    public UserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext, emailManager)
     {
     }
 }

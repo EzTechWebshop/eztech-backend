@@ -1,7 +1,7 @@
 ﻿using EzTech.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace EzTech.Data;
 
@@ -11,12 +11,12 @@ public class EzTechDbContext : DbContext
     public EzTechDbContext(DbContextOptions<EzTechDbContext> options)
         : base(new DbContextOptionsBuilder<EzTechDbContext>(options)
             .ConfigureWarnings(warnings =>
-                warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId
+                warnings.Ignore(RelationalEventId
                     .MultipleCollectionIncludeWarning))
             .Options)
     {
     }
-    
+
     /// <summary>
     /// Used for migrations, is not used in production.
     /// It is used to create the database, and to update it.
@@ -32,7 +32,7 @@ public class EzTechDbContext : DbContext
             return new EzTechDbContext(optionsBuilder.Options);
         }
     }
-    
+
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;

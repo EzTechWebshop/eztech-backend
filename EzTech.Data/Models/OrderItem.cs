@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace EzTech.Data.Models;
@@ -21,8 +20,8 @@ public class OrderItem
     
     public decimal Total => Price * Quantity;
     
-    [Required]
     // Information stored above in case product is deleted, or changed
+    [Required]
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
     [Required]

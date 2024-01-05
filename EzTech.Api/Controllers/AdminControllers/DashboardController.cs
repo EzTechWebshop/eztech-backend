@@ -47,7 +47,7 @@ public class DashboardController : BaseAdminController
             };
             return newOrder;
         }).ToList();
-        
+
         var incomeToday = completedOrders.Where(x => x.CreatedAt.Date == DateTime.Now.Date).Sum(x => x.Total);
         var incomeThisMonth = completedOrders.Where(x => x.CreatedAt.Month == DateTime.Now.Month).Sum(x => x.Total);
         var incomeThisYear = completedOrders.Where(x => x.CreatedAt.Year == DateTime.Now.Year).Sum(x => x.Total);

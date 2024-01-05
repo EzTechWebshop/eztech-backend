@@ -12,7 +12,6 @@ namespace EzTech.Api.Controllers.UserControllers;
 [Route("api/[controller]")]
 public class CartController : BaseUserController
 {
-    
     [HttpPost]
     [Route("change-quantity")]
     public async Task<ActionResult> ChangeQuantity([FromBody] ChangeQuantityRequest request)
@@ -27,7 +26,7 @@ public class CartController : BaseUserController
 
         user.Cart.ChangeQuantity(request.CartItemId, request.Quantity);
         await DbContext.SaveChangesAsync();
-        
+
         return Ok("Quantity changed");
     }
 
@@ -86,7 +85,8 @@ public class CartController : BaseUserController
         return Ok("Removed from cart");
     }
 
-    public CartController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext, emailManager)
+    public CartController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext, emailManager)
     {
     }
 }

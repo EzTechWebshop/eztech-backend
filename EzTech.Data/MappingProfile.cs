@@ -24,5 +24,4 @@ public class MappingProfile : Profile
         CreateMap<WebsiteInfo, WebsiteInfoDto>().ReverseMap();
         CreateMap<WebsiteInfoText, WebsiteInfoTopic>().ReverseMap();
     }
-    
 }

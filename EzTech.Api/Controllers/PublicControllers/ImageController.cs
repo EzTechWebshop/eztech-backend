@@ -18,8 +18,9 @@ public class ImageController : BaseController
         var image = await _blobService.GetImage(fileName);
         return File(image, "image/jpeg");
     }
-    
-    public ImageController(IMapper mapper, EzTechDbContext dbContext, IBlobService blobService) : base(mapper, dbContext)
+
+    public ImageController(IMapper mapper, EzTechDbContext dbContext, IBlobService blobService) : base(mapper,
+        dbContext)
     {
         _blobService = blobService;
     }

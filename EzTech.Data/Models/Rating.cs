@@ -21,6 +21,7 @@ public class Rating
     [Required] 
     public int ProductId { get; set; }
     public Product Product { get; set; } = null!;
+    
     [Required] 
     public int UserId { get; set; }
     public User User { get; set; } = null!;

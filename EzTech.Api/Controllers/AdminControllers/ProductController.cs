@@ -194,6 +194,7 @@ public class ProductController : BaseAdminController
         {
             await _fileService.DeleteImage(image.FileName);
         }
+
         DbContext.Products.Remove(product);
         await DbContext.SaveChangesAsync();
         return Ok("Product deleted");

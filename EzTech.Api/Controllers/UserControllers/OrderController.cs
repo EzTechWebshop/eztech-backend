@@ -32,19 +32,21 @@ public class OrderController : BaseUserController
         {
             return BadRequest("Order already has this status");
         }
+
         var newStatus = Enum.Parse<OrderStatus>(status);
-        
+
         if (order.Status == newStatus)
         {
             return BadRequest("Order already has this status");
         }
+
         order.Status = Enum.Parse<OrderStatus>(status);
-        
+
         await DbContext.SaveChangesAsync();
-        
+
         return Ok("Order status changed");
     }
-    
+
     [HttpGet]
     [Route("{orderNumber}")]
     public async Task<ActionResult> GetOrder(string orderNumber)
@@ -58,7 +60,7 @@ public class OrderController : BaseUserController
         var response = Mapper.Map<OrderDto>(order);
         return Ok(response);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
     {
@@ -99,14 +101,16 @@ public class OrderController : BaseUserController
                 .FirstOrDefaultAsync(product => product.Id == orderItem.ProductId);
             product!.Sell(orderItem.Quantity);
         }
+
         await DbContext.SaveChangesAsync();
         var response = Mapper.Map<OrderDto>(order);
-        await EmailManager.SendEmail(user.Email, "Order created", 
+        await EmailManager.SendEmail(user.Email, "Order created",
             $"Your order has been created\nLink: https://ez-tech-vercel.vercel.app/order/{order.OrderNumber}");
         return Ok(response);
     }
 
-    public OrderController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext, emailManager)
+    public OrderController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext, emailManager)
     {
     }
 }

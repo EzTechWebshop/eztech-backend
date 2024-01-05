@@ -2,20 +2,17 @@
 using EzTech.Api.Authentication;
 using EzTech.Api.Services;
 using EzTech.Data;
-using EzTech.Data.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 
 namespace EzTech.Api.Controllers;
 
 [Authorize(Policy = "IsUser")]
 public class BaseUserController : BaseController
 {
-
     protected readonly IEmailManager EmailManager;
-    
+
     // Taken from internship code
-    // Gets the currently logged user from the token
+    // Gets the currently logged user from the token given in the header
     protected UserPrincipal UserPrincipal
     {
         get
@@ -25,7 +22,8 @@ public class BaseUserController : BaseController
         }
     }
 
-    public BaseUserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext)
+    public BaseUserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext)
     {
         EmailManager = emailManager;
     }

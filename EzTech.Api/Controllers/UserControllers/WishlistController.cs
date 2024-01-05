@@ -77,7 +77,8 @@ public class WishlistController : BaseUserController
         return Ok();
     }
 
-    public WishlistController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext, emailManager)
+    public WishlistController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext, emailManager)
     {
     }
 }

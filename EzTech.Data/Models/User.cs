@@ -6,28 +6,17 @@ namespace EzTech.Data.Models;
 
 public class User
 {
-
-    public void UpdateDetails(UpdateUserDetailsRequest request)
-    {
-        FirstName = request.FirstName ?? FirstName;
-        LastName = request.LastName ?? LastName;
-        Email = request.Email ?? Email;
-        PhoneNumber = request.PhoneNumber ?? PhoneNumber;
-        Address = request.Address ?? Address;
-        City = request.City ?? City;
-        Country = request.Country ?? Country;
-        PostalCode = request.PostalCode ?? PostalCode;
-        
-    }
-    
     [Key]
     public int Id { get; set; }
+    
     [Required]
     [EmailAddress]
     [MaxLength(500)]
     public string Email { get; set; } = null!;
+    
     [Required]
     public string Role { get; set; } = UserRoles.User;
+    
     [Required]
     [MaxLength(50)]
     public string FirstName { get; set; } = null!;
@@ -53,6 +42,18 @@ public class User
     [Required]
     [JsonIgnore]
     public string Hash { get; set; } = null!;
+
+    public void UpdateDetails(UpdateUserDetailsRequest request)
+    {
+        FirstName = request.FirstName ?? FirstName;
+        LastName = request.LastName ?? LastName;
+        Email = request.Email ?? Email;
+        PhoneNumber = request.PhoneNumber ?? PhoneNumber;
+        Address = request.Address ?? Address;
+        City = request.City ?? City;
+        Country = request.Country ?? Country;
+        PostalCode = request.PostalCode ?? PostalCode;
+    }
 }
 
 public static class UserRoles

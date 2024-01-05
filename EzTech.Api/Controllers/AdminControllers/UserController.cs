@@ -13,7 +13,7 @@ namespace EzTech.Api.Controllers.AdminControllers;
 public class UserController : BaseAdminController
 {
     private readonly IEmailManager _emailManager;
-    
+
     // Not implemented yet, but is useful to add in the future
     [HttpPatch]
     [Route("/{userId:int}/change-users-password")]
@@ -34,10 +34,12 @@ public class UserController : BaseAdminController
         {
             return Ok("Successfully updated password and sent email");
         }
+
         return Ok("Successfully updated password, but failed to send email");
-        
     }
-    public UserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext)
+
+    public UserController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext)
     {
         _emailManager = emailManager;
     }

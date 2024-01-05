@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EzTech.Api.Services;
 using EzTech.Data;
-using EzTech.Data.ApiModels.UserApiModels;
 using EzTech.Data.ApiModels.UserApiModels.RatingApiModels;
 using EzTech.Data.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +11,13 @@ namespace EzTech.Api.Controllers.UserControllers;
 [Route("api/[controller]")]
 public class RatingController : BaseUserController
 {
-    
     [HttpPost]
     [Route("{productId:int}")]
     public async Task<IActionResult> AddRating(int productId, [FromBody] AddRatingRequest request)
     {
         var user = await DbContext.Users.FindAsync(UserPrincipal.Id);
         var product = await DbContext.Products.FindAsync(productId);
-        if(user == null) return NotFound("User not found");
+        if (user == null) return NotFound("User not found");
         if (product == null) return NotFound("Product not found");
         var rating = new Rating
         {
@@ -32,7 +30,7 @@ public class RatingController : BaseUserController
         await DbContext.SaveChangesAsync();
         return Ok("Rating added");
     }
-    
+
     [HttpPatch]
     [Route("{ratingId:int}")]
     public async Task<IActionResult> UpdateRating(int ratingId, [FromBody] UpdateRatingRequest request)
@@ -44,8 +42,9 @@ public class RatingController : BaseUserController
         await DbContext.SaveChangesAsync();
         return Ok("Rating updated");
     }
-    
-    public RatingController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper, dbContext, emailManager)
+
+    public RatingController(IMapper mapper, EzTechDbContext dbContext, IEmailManager emailManager) : base(mapper,
+        dbContext, emailManager)
     {
     }
 }

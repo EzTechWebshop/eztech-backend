@@ -11,7 +11,6 @@ namespace EzTech.Api.Controllers.AdminControllers;
 [Route("api/admin/[controller]")]
 public class FaqController : BaseAdminController
 {
-    
     [HttpPost]
     public async Task<IActionResult> CreateFaq([FromBody] CreateFaqRequest request)
     {
@@ -20,6 +19,7 @@ public class FaqController : BaseAdminController
         {
             return Conflict("Faq already exists");
         }
+
         var newFaq = new Faq
         {
             Question = request.Question,
@@ -29,7 +29,7 @@ public class FaqController : BaseAdminController
         await DbContext.SaveChangesAsync();
         return Ok(newFaq);
     }
-    
+
     [HttpPatch]
     [Route("{faqId:int}")]
     public async Task<IActionResult> UpdateFaq(int faqId, [FromBody] UpdateFaqRequest request)
@@ -41,7 +41,7 @@ public class FaqController : BaseAdminController
         await DbContext.SaveChangesAsync();
         return Ok(faq);
     }
-    
+
     [HttpDelete]
     [Route("{faqId:int}")]
     public async Task<IActionResult> DeleteFaq(int faqId)

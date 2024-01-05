@@ -4,16 +4,16 @@ namespace EzTech.Data.Models;
 
 public class OpeningHours
 {
-    [Required]
+    [Required] 
     public int Id { get; set; }
     
     [Required]
     public DayOfWeek DayOfWeek { get; set; }
     
-    [Required]
+    [Required] 
     public TimeSpan OpenTime { get; set; }
     
-    [Required]
+    [Required] 
     public TimeSpan CloseTime { get; set; }
     
     public bool IsClosed => OpenTime == TimeSpan.Zero && CloseTime == TimeSpan.Zero;

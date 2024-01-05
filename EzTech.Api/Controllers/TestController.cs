@@ -15,8 +15,8 @@ namespace EzTech.Api.Controllers;
 [Route("api/[controller]")]
 public class TestController : BaseController
 {
-    
     private readonly IBlobService _blobService;
+
     // An array with the names of the categories, used to create test data
     private readonly List<string> _categoryNames = new()
     {
@@ -34,7 +34,7 @@ public class TestController : BaseController
     {
         // Resets all data in sql database
         await Wipe();
-        
+
         // Creates test data
         var websiteInfoCreated = await CreateWebsiteInfo();
         if (!websiteInfoCreated) return BadRequest("Failed to create website info");
@@ -108,7 +108,7 @@ public class TestController : BaseController
         // Creating the website info
         // Opening Hours
         var openingHours = new List<OpeningHours>();
-        
+
         // Monday - Friday
         for (var i = 1; i < 6; i++)
         {
@@ -120,6 +120,7 @@ public class TestController : BaseController
             };
             openingHours.Add(openingHour);
         }
+
         // Saturday
         openingHours.Add(new OpeningHours
         {
@@ -182,7 +183,7 @@ public class TestController : BaseController
         // Opening Hours
         // Opening Hours
         var openingHours = new List<OpeningHours>();
-        
+
         // Monday - Friday
         for (var i = 1; i < 6; i++)
         {
@@ -194,6 +195,7 @@ public class TestController : BaseController
             };
             openingHours.Add(openingHour);
         }
+
         // Saturday
         openingHours.Add(new OpeningHours
         {
@@ -398,6 +400,7 @@ public class TestController : BaseController
         var count = _blobService.GetBlobCount();
         return Ok(count);
     }
+
     public TestController(IMapper mapper, EzTechDbContext dbContext, IBlobService blobService) : base(mapper, dbContext)
     {
         _blobService = blobService;

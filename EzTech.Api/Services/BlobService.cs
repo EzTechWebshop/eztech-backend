@@ -9,7 +9,9 @@ public interface IBlobService
     Task<(int, string)> UploadImage(string fileName, IFormFile file);
     Task<(int, string)> DeleteImage(string url);
     Task<bool> ImageExists(string filename);
+
     int GetBlobCount();
+
     // Used during development to wipe the blob storage
     Task<bool> Wipe();
 }
@@ -44,7 +46,7 @@ public class BlobService : IBlobService
             return new MemoryStream(defaultImage);
         }
     }
-    
+
     public async Task<(int, string)> UploadImage(string fileName, IFormFile file)
     {
         using var memoryStream = new MemoryStream();
@@ -71,7 +73,6 @@ public class BlobService : IBlobService
 
         return (0, "Image not uploaded");
     }
-    // var response = await blobClient.UploadAsync(new MemoryStream(data), blobHttpHeader);
 
     public async Task<(int, string)> DeleteImage(string url)
     {

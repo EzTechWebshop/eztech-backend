@@ -89,6 +89,7 @@ public class PromotionController : BaseAdminController
         {
             await _blobService.DeleteImage(promotion.ImageUrl);
         }
+
         DbContext.Promotions.Remove(promotion);
         await DbContext.SaveChangesAsync();
         return Ok("Promotion deleted");

@@ -66,7 +66,7 @@ public class CategoryController : BaseAdminController
         {
             return NotFound("Category not found");
         }
-        
+
         category.Name = request.Name ?? category.Name;
         category.Description = request.Description ?? category.Description;
 
