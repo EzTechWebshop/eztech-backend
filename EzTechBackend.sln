@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzTech.Api", "EzTech.Api\EzTech.Api.csproj", "{3171AF6A-A639-4AB1-91BA-B70B7A9516A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzTech.Data", "EzTech.Data\EzTech.Data.csproj", "{51B4FC48-DD3D-4EB9-901A-DBA90F6E8377}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3171AF6A-A639-4AB1-91BA-B70B7A9516A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3171AF6A-A639-4AB1-91BA-B70B7A9516A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3171AF6A-A639-4AB1-91BA-B70B7A9516A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3171AF6A-A639-4AB1-91BA-B70B7A9516A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B4FC48-DD3D-4EB9-901A-DBA90F6E8377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B4FC48-DD3D-4EB9-901A-DBA90F6E8377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B4FC48-DD3D-4EB9-901A-DBA90F6E8377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B4FC48-DD3D-4EB9-901A-DBA90F6E8377}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

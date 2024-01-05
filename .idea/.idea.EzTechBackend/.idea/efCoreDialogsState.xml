@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:51b4fc48-dd3d-4eb9-901a-dba90f6e8377:dbContext" value="EzTech.Data.EzTechDbContext" />
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:enableDiagnosticLogging" value="false" />
+        <entry key="Common:noBuild" value="false" />
+        <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:useDefaultConnection" value="true" />
+      </map>
+    </option>
+  </component>
+</project>
