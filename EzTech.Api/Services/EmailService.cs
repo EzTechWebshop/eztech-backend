@@ -12,10 +12,17 @@ public interface IEmailManager
 // Ideally, we would have some sort of template for the message, but for now, we'll just send normal text
 public class EmailService : IEmailManager
 {
+    private readonly IConfiguration _configuration;
+
+    public EmailService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     public async Task<bool> SendEmail(string email, string subject, string message)
     {
-        const string mail = "rash0081zz@hotmail.com";
-        const string pw = "TestEmail";
+        var mail = _configuration["Email:Login"];
+        var pw = _configuration["Email:Password"];
         var client = new SmtpClient("smtp-mail.outlook.com", 587)
         {
             EnableSsl = true,

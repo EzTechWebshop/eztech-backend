@@ -176,6 +176,10 @@ public class ProductController : BaseAdminController
     [Route("{id:int}")]
     public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductRequest request)
     {
+        var existingProduct = await DbContext.Products
+            .OrderBy(u => u.Id)
+            .FirstOrDefaultAsync(x => x.Name == request.Name);
+        if (existingProduct != null) return Conflict("Product already exists");
         var product = await DbContext.Products.FindAsync(id);
         if (product == null) return NotFound();
         product.Update(request);

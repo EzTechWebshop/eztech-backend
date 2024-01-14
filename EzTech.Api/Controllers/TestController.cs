@@ -246,7 +246,7 @@ public class TestController : BaseController
             Instagram = "#",
             TrustPilot = "#",
             Website = "#",
-            FooterInfo = "...",
+            FooterInfo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultrices aliquam, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.",
             WeeklyOpeningHours = openingHours,
             SpecialOpeningHours = specialDays,
         };

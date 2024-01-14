@@ -105,7 +105,7 @@ public class OrderController : BaseUserController
         await DbContext.SaveChangesAsync();
         var response = Mapper.Map<OrderDto>(order);
         await EmailManager.SendEmail(user.Email, "Order created",
-            $"Your order has been created\nLink: https://ez-tech-vercel.vercel.app/order/{order.OrderNumber}");
+            $"Your order has been created\nLink: http://localhost:3000/order/{order.OrderNumber}");
         return Ok(response);
     }
 
