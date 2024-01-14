@@ -57,9 +57,15 @@ public class TestController : BaseController
         var promotionsCreated = await CreateTestPromotions();
         if (!promotionsCreated) return BadRequest("Failed to create promotions");
 
+        var orderCreated = await CreateTestOrders();
+        if (!orderCreated) return BadRequest("Failed to create orders");
+
         return Ok("All test data created");
     }
 
+    
+    
+    
     [HttpGet]
     [Route("start-up-production")]
     public async Task<ActionResult> StartRaw()
@@ -266,7 +272,6 @@ public class TestController : BaseController
             Salt = PasswordHelper.GenerateSalt(),
             IsEmailVerified = true,
             VerificationToken = "1234",
-            Role = UserRoles.Admin,
             PhoneNumber = "87654321"
         };
         user.Hash = PasswordHelper.HashPassword(startUpPassword, user.Salt);
@@ -338,8 +343,44 @@ public class TestController : BaseController
 
         await DbContext.Products.AddRangeAsync(products);
         await DbContext.SaveChangesAsync();
+    } 
+    private async Task<bool> CreateTestOrders()
+    {
+        var user = await DbContext.Users
+            .OrderBy(x => x.Id)
+            .Include(u => u.Orders)
+            .ThenInclude(order => order.Items)
+            .FirstOrDefaultAsync(x => x.Email == "user@example.com");
+        if (user == null) return false;
+        var items = await DbContext.Products
+            .OrderBy(x => x.Id)
+            .Take(5)
+            .ToListAsync();
+        var orderItems = items.Select(
+            product => new OrderItem
+            {
+                ProductId = product.Id,
+                ProductName = product.Name,
+                ProductDescription = product.Description,
+                Price = (decimal)product.Price!,
+                Quantity = 3
+            }).ToList();
+        
+        var orders = new List<Order>();
+        for (var i = 1; i < 7; i++)
+        {
+            var order = new Order
+            {
+                Total = 1000*i,
+                Items = orderItems,
+                CreatedAt = DateTime.Now
+            };
+            orders.Add(order);
+        }
+        user.Orders.AddRange(orders);
+        await DbContext.SaveChangesAsync();
+        return true;
     }
-
     private async Task<bool> CreateTestFaq()
     {
         var faqs = new List<Faq>();
