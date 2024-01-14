@@ -15,5 +15,5 @@ public class Promotion
     
     public bool IsActive => DateTime.Now >= StartDate && DateTime.Now <= EndDate;
     public List<Product> Products { get; set; } = null!;
-    public string ImageUrl { get; set; } = "/no-image.jpg";
+    public string ImageUrl { get; set; } = "no-image.jpg";
 }
