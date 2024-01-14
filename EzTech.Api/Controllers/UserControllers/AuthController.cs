@@ -113,6 +113,9 @@ public class AuthController : BaseUserController
         newUser.VerificationToken = Guid.NewGuid().ToString();
         await DbContext.Users.AddAsync(newUser);
         await DbContext.SaveChangesAsync();
+        var emailMessage = "Please verify your email by clicking this link: " +
+                           $"http://localhost:5122/api/auth/verify-email/{newUser.VerificationToken}";
+        await EmailManager.SendEmail(newUser.Email, "Email Verification", emailMessage);
         return Ok("Successfully signed up");
     }
 
